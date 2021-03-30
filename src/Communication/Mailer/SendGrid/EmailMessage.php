@@ -3,7 +3,7 @@
  * @author Yenier Jimenez <yjmorales86@gmail.com>
  */
 
-namespace App\Mailer\SendGrid;
+namespace App\Communication\Mailer\SendGrid;
 
 /**
  * Holds an email message structure.
