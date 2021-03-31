@@ -19,14 +19,26 @@ use SendGrid\Mail\TypeException;
 class Mailer
 {
     /**
-     * SendGrid api key.
+     * SendGrid API KEY for sender of Personal Page Sender .
+     *
+     * @var string
      */
-    private const SENDGRID_API_KEY = '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';
+    protected $_sendGridApiKey;
 
     /**
-     * SendGrid `from` sender.
+     * Sender Email Address.
+     *
+     * @var string
      */
-    private const SENDGRID_FROM = 'yenjim1986@gmail.com';
+    protected $_sendGridFromEmailAddress;
+
+    public function __construct(string $sendGridApiKey
+        , string $sendGridFromEmailAddress
+    )
+    {
+        $this->_sendGridApiKey           = $sendGridApiKey;
+        $this->_sendGridFromEmailAddress = $sendGridFromEmailAddress;
+    }
 
     /**
      * @param string $subject  Email subject
@@ -42,7 +54,7 @@ class Mailer
     public function send(string $subject, string $content, string $fromName, string ...$to): bool
     {
         $email = new Mail();
-        $email->setFrom(self::SENDGRID_FROM, $fromName);
+        $email->setFrom($this->_sendGridFromEmailAddress, $fromName);
         $email->setSubject($subject);
         $email->addContent("text/html", $content);
 
@@ -50,7 +62,7 @@ class Mailer
             $email->addTo($destination);
         }
 
-        $sendGrid = new SendGrid(self::SENDGRID_API_KEY);
+        $sendGrid = new SendGrid($this->_sendGridApiKey);
 
         try {
             $response = MailerResponse::fromSendGridResponse($sendGrid->send($email));
