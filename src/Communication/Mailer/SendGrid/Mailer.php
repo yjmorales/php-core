@@ -3,10 +3,9 @@
  * @author Yenier Jimenez <yjmorales86@gmail.com>
  */
 
-namespace App\Communication\Mailer\SendGrid;
+namespace Common\Communication\Mailer\SendGrid;
 
-use App\Communication\Mailer\SendGrid\MailerResponse;
-use App\Mailer\SendGrid\Exception\MailerException;
+use Common\Communication\Mailer\SendGrid\Exception\MailerException;
 use SendGrid\Mail\Mail;
 use SendGrid;
 use Exception;

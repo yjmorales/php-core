@@ -5,7 +5,7 @@
   "description": "PHP Core library for web applications.",
   "autoload": {
     "psr-4": {
-      "App\\": "src/"
+      "Common\\": "src/"
     }
   },
   "require": {

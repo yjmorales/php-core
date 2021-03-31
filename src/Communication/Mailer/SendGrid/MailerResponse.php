@@ -3,14 +3,14 @@
  * @author Yenier Jimenez <yjmorales86@gmail.com>
  */
 
-namespace App\Communication\Mailer\SendGrid;
+namespace Common\Communication\Mailer\SendGrid;
 
 use SendGrid\Response as SendGridResponse;
 
 /**
  * Represents the Mailer Response.
  *
- * @package App\Communication\Mailer\SendGrid
+ * @package Common\Communication\Mailer\SendGrid
  */
 class MailerResponse
 {
