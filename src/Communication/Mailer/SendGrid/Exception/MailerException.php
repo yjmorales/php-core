@@ -3,7 +3,7 @@
  * @author Yenier Jimenez <yjmorales86@gmail.com>
  */
 
-namespace App\Communication\Mailer\SendGrid\Exception;
+namespace Common\Communication\Mailer\SendGrid\Exception;
 
 use Exception;
 
