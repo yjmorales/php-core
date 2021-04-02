@@ -32,9 +32,13 @@ class Mailer
      */
     protected $_sendGridFromEmailAddress;
 
-    public function __construct(string $sendGridApiKey
-        , string $sendGridFromEmailAddress
-    )
+    /**
+     * Mailer constructor.
+     *
+     * @param string $sendGridApiKey
+     * @param string $sendGridFromEmailAddress
+     */
+    public function __construct(string $sendGridApiKey, string $sendGridFromEmailAddress)
     {
         $this->_sendGridApiKey           = $sendGridApiKey;
         $this->_sendGridFromEmailAddress = $sendGridFromEmailAddress;
@@ -73,5 +77,4 @@ class Mailer
             throw new MailerException('Failed to send email to ');
         }
     }
-
 }

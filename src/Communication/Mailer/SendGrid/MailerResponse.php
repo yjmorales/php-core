@@ -15,7 +15,7 @@ use SendGrid\Response as SendGridResponse;
 class MailerResponse
 {
     /**
-     * Status codes representing a success repsonse.
+     * Status codes representing a success response.
      */
     private const SUCCESS_STATUS_CODES = [200, 202];
 
