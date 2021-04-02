@@ -14,7 +14,7 @@ use SendGrid\Mail\TypeException;
 /**
  * An implementation of a Send Grid Email Sender.
  *
- * @package App\Mailer
+ * @package Common\Communication\Mailer\SendGrid
  */
 class Mailer
 {

@@ -11,7 +11,7 @@ use JsonSerializable;
 /**
  * Holds an email message structure abstraction.
  *
- * @package App\Mailer\SendGrid
+ * @package Common\Communication\Mailer\SendGrid
  */
 abstract class AbstractEmailMessage implements JsonSerializable
 {

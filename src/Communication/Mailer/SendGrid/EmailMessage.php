@@ -6,9 +6,9 @@
 namespace Common\Communication\Mailer\SendGrid;
 
 /**
- * Holds a SendGrid email message structure .
+ * Holds a SendGrid email message structure.
  *
- * @package App\Mailer\SendGrid
+ * @package Common\Communication\Mailer\SendGrid
  */
 class EmailMessage extends AbstractEmailMessage
 {

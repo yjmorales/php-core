@@ -3,14 +3,14 @@
  * @author Yenier Jimenez <yjmorales86@gmail.com>
  */
 
-namespace App\Queueing\Pheanstalk\Service;
+namespace Common\Queueing\Pheanstalk\Service;
 
 use Pheanstalk\Pheanstalk as BasePheanstalk;
 
 /**
  *  Service holding the PHP pheanstalk client
  *
- * @package App\Queueing\Pheanstalk\Service
+ * @package Common\Queueing\Pheanstalk\Service
  */
 class Pheanstalk
 {
