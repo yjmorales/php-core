@@ -3,7 +3,7 @@
  * @author Yenier Jimenez <yjmorales86@gmail.com>
  */
 
-namespace Common\Communication\Mailer\SendGrid;
+namespace Common\Communication\Mailer\Entity;
 
 use Illuminate\Support\Arr;
 use JsonSerializable;
@@ -11,7 +11,7 @@ use JsonSerializable;
 /**
  * Holds an email message structure abstraction.
  *
- * @package Common\Communication\Mailer\SendGrid
+ * @package Common\Communication\Mailer\Entity
  */
 abstract class AbstractEmailMessage implements JsonSerializable
 {
