@@ -1,0 +1,28 @@
+{#
+ Prepares a text field for an auto-format phone field. Only the user is able to enter the phone number
+ with the format (xxx) xxx - xxxx
+#}
+{%- macro macro_auto_phone_format(options) -%}
+    {% set id = options.id is not null ? options.id : false %}
+    {% set name = options.name is not null ? options.name : false %}
+    {% set value = options.value is not null ? options.value : false %}
+    {% set required = options.required is not null ? options.required : false %}
+    <input type="text"
+           class="form-control auto-phone-format"
+            {% if id %}
+                id="{{ id }}"
+            {% endif %}
+
+            {% if name %}
+                name="{{ name }}"
+            {% endif %}
+
+            {% if value %}
+                value="{{ value }}"
+            {% endif %}
+
+            {% if required  %}
+                required
+            {% endif %}
+    >
+{%- endmacro -%}
