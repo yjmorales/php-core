@@ -9,7 +9,7 @@
     }
   },
   "require": {
-    "php": ">=7.2.0",
+    "php": ">=7.4",
     "ext-json": "*",
     "crussell52/php-enum": "0.1",
     "illuminate/support": "^8.53",
@@ -19,7 +19,7 @@
   "config": {
     "bin-dir": "bin",
     "platform": {
-      "php": "7.2"
+      "php": "7.4"
     },
     "sort-packages": true
   }
