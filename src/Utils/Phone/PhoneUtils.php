@@ -12,7 +12,7 @@ use Exception;
  *
  * @package Common\Utils\Phone
  */
-class PhoneUtility
+class PhoneUtils
 {
     private const SUPPORTED_COUNTRY_CODES = ['us'];
 
