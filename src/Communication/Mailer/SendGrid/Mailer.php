@@ -5,15 +5,23 @@
 
 namespace Common\Communication\Mailer\SendGrid;
 
-use Common\Communication\Mailer\SendGrid\Exception\MailerException;
 use SendGrid\Mail\Mail;
 use SendGrid;
 use Exception;
-use SendGrid\Mail\TypeException;
+use SendGrid\Mail\To;
 
 /**
  * An implementation of a Send Grid Email Sender.
+ * If this class is being used within a symfony project then it's good to define a service like this:
  *
+
+  Common\Communication\Mailer\SendGrid\Mailer:
+    class: Common\Communication\Mailer\SendGrid\Mailer
+    arguments:
+      - '%env(SENDGRID_API_KEY)%'
+      - '%personal_page_sender_email%'
+      - '%personal_page_sender_name%'
+
  * @package Common\Communication\Mailer\SendGrid
  */
 class Mailer
@@ -26,55 +34,55 @@ class Mailer
     protected $_sendGridApiKey;
 
     /**
-     * Sender Email Address.
+     * Holds the sender email tied to the SendGrid account.
      *
      * @var string
      */
-    protected $_sendGridFromEmailAddress;
+    protected $_senderEmail;
 
     /**
-     * Mailer constructor.
+     * Holds the sender name tied to the SendGrid Account.
      *
-     * @param string $sendGridApiKey
-     * @param string $sendGridFromEmailAddress
+     * @var string
      */
-    public function __construct(string $sendGridApiKey, string $sendGridFromEmailAddress)
+    protected $_senderName;
+
+    /**
+     * @param string $sendGridApiKey SendGrid API KEY for sender of Personal Page Sender .
+     * @param string $senderEmail    Holds the sender email tied to the SendGrid account.
+     * @param string $senderName     Holds the sender name tied to the SendGrid Account.
+     */
+    public function __construct(string $sendGridApiKey, string $senderEmail, string $senderName)
     {
-        $this->_sendGridApiKey           = $sendGridApiKey;
-        $this->_sendGridFromEmailAddress = $sendGridFromEmailAddress;
+        $this->_sendGridApiKey = $sendGridApiKey;
+        $this->_senderEmail    = $senderEmail;
+        $this->_senderName     = $senderName;
     }
 
     /**
-     * @param string $subject  Email subject
-     * @param string $content  Email content (html format).
-     * @param string $fromName The sender name that should be shown on the destination inbox.
-     * @param string ...$to    List of email address that will receive the message.
+     * Sends an email.
      *
-     * @return bool
+     * @param string $subject Email subject
+     * @param string $content Holds the email html content value.
+     * @param To     ...$to   Holds the destination emails.
      *
-     * @throws MailerException
-     * @throws TypeException
+     * @return bool True if the message has been sent, otherwise false.
      */
-    public function send(string $subject, string $content, string $fromName, string ...$to): bool
+    public function send(string $subject, string $content, To ...$to): bool
     {
-        $email = new Mail();
-        $email->setFrom($this->_sendGridFromEmailAddress, $fromName);
-        $email->setSubject($subject);
-        $email->addContent("text/html", $content);
-
-        foreach ($to as $destination) {
-            $email->addTo($destination);
-        }
-
-        $sendGrid = new SendGrid($this->_sendGridApiKey);
-
+        $result = true;
         try {
-            $response = MailerResponse::fromSendGridResponse($sendGrid->send($email));
-
-            return $response->isSuccess();
-
+            $email = new Mail();
+            $email->setFrom($this->_senderEmail, $this->_senderName);
+            $email->setSubject($subject);
+            $email->addTos($to);
+            $email->addContent('text/html', $content);
+            $sendgrid = new SendGrid($this->_sendGridApiKey);
+            $sendgrid->send($email);
         } catch (Exception $e) {
-            throw new MailerException('Failed to send email to ');
+            $result = false;
         }
+
+        return $result;
     }
 }
