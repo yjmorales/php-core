@@ -41,7 +41,7 @@ class PhoneUtils
     public static function dashed(string $phone, string $countryCode = 'us'): string
     {
         // Sanitizing phone and country code.
-        self::_sanity($phone, $countryCode);
+        self::_sanitizing($phone, $countryCode);
 
         // Formatting
         switch ($countryCode) {
@@ -66,7 +66,7 @@ class PhoneUtils
     public static function semiDashed(string $phone, string $countryCode = 'us'): string
     {
         // Sanitizing phone and country code.
-        self::_sanity($phone, $countryCode);
+        self::_sanitizing($phone, $countryCode);
 
         // Formatting
         switch ($countryCode) {
@@ -150,6 +150,8 @@ class PhoneUtils
     }
 
     /**
+     * Helper function to validate and adjust the phone and country code.
+     *
      * @param string $phone
      * @param string $countryCode
      *
@@ -157,13 +159,12 @@ class PhoneUtils
      *
      * @throws Exception
      */
-    private static function _sanity(string &$phone, string &$countryCode): void
+    private static function _sanitizing(string &$phone, string &$countryCode): void
     {
-        $phone = self::plain($phone);
-
+        // Sanitizing phone
+        $phone        = self::plain($phone);
         $phoneSize    = mb_strlen($phone);
         $allowedSizes = [10, 11];
-
         if (!in_array($phoneSize, $allowedSizes)) {
             throw new Exception("The phone: {$phone} hasn't a valid length to be US phone number.");
         }

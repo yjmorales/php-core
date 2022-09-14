@@ -42,12 +42,12 @@ function AutoPhoneFormatter() {
         let value    = $field.val()
             , output = '';
 
-        // If there is not text in the field then doesn't apply the formatter function.
+        // If there is no text in the field then doesn't apply the formatter function.
         if (value.length === 0) {
             return;
         }
 
-        // Only the formatter is applied to numerical inputs. So, it replaces all non numerical inputs with an empty value.
+        // Only the formatter is applied to numerical inputs. So, it replaces all non-numerical inputs with an empty value.
         value = value.replace(/[^0-9]/g, '');
 
         // Building the output.

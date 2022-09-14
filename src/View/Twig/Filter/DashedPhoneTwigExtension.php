@@ -5,7 +5,7 @@
 
 namespace Common\View\Twig\Filter;
 
-use Common\Utils\Phone\PhoneUtility;
+use Common\Utils\Phone\PhoneUtils;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Exception;
@@ -54,6 +54,6 @@ class DashedPhoneTwigExtension extends AbstractExtension
      */
     public function toDashedFormat(string $phone): string
     {
-        return PhoneUtility::semiDashed($phone);
+        return PhoneUtils::semiDashed($phone);
     }
 }

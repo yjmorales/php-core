@@ -5,6 +5,8 @@
 
 namespace Common\Communication\Mailer\SendGrid;
 
+use Common\Communication\Mailer\Entity\AbstractEmailMessage;
+
 /**
  * Holds a SendGrid email message structure.
  *

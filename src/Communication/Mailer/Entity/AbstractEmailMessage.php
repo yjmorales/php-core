@@ -16,26 +16,36 @@ use JsonSerializable;
 abstract class AbstractEmailMessage implements JsonSerializable
 {
     /**
+     * Holds a destination list. All values should be email addresses.
+     *
      * @var string[]
      */
     protected $_to;
 
     /**
+     * Holds the email subject.
+     *
      * @var string
      */
     protected $_subject;
 
     /**
+     * Holds the email content. Html or plain text.
+     *
      * @var string
      */
     protected $_content;
 
     /**
+     * Holds the sender name.
+     *
      * @var string
      */
     protected $_fromName;
 
     /**
+     * Returns the destination list.
+     *
      * @return string[]
      */
     public function getTo(): array
@@ -44,6 +54,8 @@ abstract class AbstractEmailMessage implements JsonSerializable
     }
 
     /**
+     * Sets the local destination list.
+     *
      * @param string[] $to
      */
     public function setTo(array $to): void
@@ -52,6 +64,8 @@ abstract class AbstractEmailMessage implements JsonSerializable
     }
 
     /**
+     * Returns the email subject.
+     *
      * @return string
      */
     public function getSubject(): string
@@ -60,6 +74,8 @@ abstract class AbstractEmailMessage implements JsonSerializable
     }
 
     /**
+     * Sets the email subject.
+     *
      * @param string $subject
      */
     public function setSubject(string $subject): void
@@ -68,6 +84,8 @@ abstract class AbstractEmailMessage implements JsonSerializable
     }
 
     /**
+     * Returns the email content.
+     *
      * @return string
      */
     public function getContent(): string
@@ -76,6 +94,8 @@ abstract class AbstractEmailMessage implements JsonSerializable
     }
 
     /**
+     * Sets the email content.
+     *
      * @param string $content
      */
     public function setContent(string $content): void
@@ -84,6 +104,9 @@ abstract class AbstractEmailMessage implements JsonSerializable
     }
 
     /**
+     *
+     * Returns the sender name.
+     *
      * @return string
      */
     public function getFromName(): string
@@ -92,6 +115,8 @@ abstract class AbstractEmailMessage implements JsonSerializable
     }
 
     /**
+     * Sets the sender name.
+     *
      * @param string $fromName
      */
     public function setFromName(string $fromName): void
@@ -113,15 +138,17 @@ abstract class AbstractEmailMessage implements JsonSerializable
     }
 
     /**
-     * @param array $data
+     * By using a given array this method populates the class properties with the respective array values.
+     *
+     * @param array $data Array holding the resource data.
      *
      * @return void
      */
     public function fromArray(array $data): void
     {
-        $this->_to = Arr::get($data, 'to', []);
-        $this->_to = Arr::get($data, 'subject', '');
-        $this->_to = Arr::get($data, 'content', '');
-        $this->_to = Arr::get($data, 'from_name', '');
+        $this->_to       = Arr::get($data, 'to', []);
+        $this->_subject  = Arr::get($data, 'subject', '');
+        $this->_content  = Arr::get($data, 'content', '');
+        $this->_fromName = Arr::get($data, 'from_name', '');
     }
 }
