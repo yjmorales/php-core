@@ -14,7 +14,7 @@
     "crussell52/php-enum": "0.1",
     "illuminate/support": "^8.53",
     "pda/pheanstalk": "^4.0",
-    "sendgrid/sendgrid": "^7.9",
+    "sendgrid/sendgrid": "^8.0",
     "twig/extensions": "^1.5"
   },
   "config": {
