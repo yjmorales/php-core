@@ -4,55 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cdb8e11d1fa5a55b183e1aef4fd3e382",
+    "content-hash": "29500cb70c3787687671157ae386a2a2",
     "packages": [
-        {
-            "name": "crussell52/php-enum",
-            "version": "v0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crussell52/php-enum.git",
-                "reference": "135bd9327f175f80756ed86e3738dae741e0186b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crussell52/php-enum/zipball/135bd9327f175f80756ed86e3738dae741e0186b",
-                "reference": "135bd9327f175f80756ed86e3738dae741e0186b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "CRusell52\\Enum\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Russell",
-                    "email": "crussell52@gmail.com",
-                    "homepage": "https://github.com/crussel52",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP Enums inspired by Java Enums",
-            "homepage": "https://github.com/crussell52/php-enum",
-            "keywords": [
-                "enum",
-                "enumeration"
-            ],
-            "support": {
-                "issues": "https://github.com/crussell52/php-enum/issues",
-                "source": "https://github.com/crussell52/php-enum/tree/master"
-            },
-            "time": "2016-03-10T17:00:01+00:00"
-        },
         {
             "name": "doctrine/inflector",
             "version": "2.0.6",
