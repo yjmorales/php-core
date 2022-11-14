@@ -286,16 +286,6 @@ class SeedValues
     }
 
     /**
-     * Generates a letter dictionary.
-     *
-     * @return string
-     */
-    protected static function _getLetters(): string
-    {
-        return 'qwertyuioplkjhgfdsazxcvbnm';
-    }
-
-    /**
      * Generates a letter.
      *
      * @return string
@@ -305,5 +295,33 @@ class SeedValues
         $dictionary = self::_getLetters();
 
         return $dictionary[rand(0, strlen($dictionary) - 1)];
+    }
+
+    /**
+     * Gets an array of business names.
+     *
+     * @return string[]
+     */
+    public static function getBusinessNames(): array
+    {
+        return [
+            'ABC Sports',
+            'Macfish Sea Food',
+            "Dinno's Restaurant",
+            'Catmix Distribuitor',
+            'SuperCargo LLC',
+            'GMC Corporations',
+            'Y2K LLC',
+        ];
+    }
+
+    /**
+     * Generates a letter dictionary.
+     *
+     * @return string
+     */
+    protected static function _getLetters(): string
+    {
+        return 'qwertyuioplkjhgfdsazxcvbnm';
     }
 }

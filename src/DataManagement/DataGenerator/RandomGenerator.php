@@ -7,6 +7,7 @@ namespace Common\DataManagement\DataGenerator;
 
 use DateTime;
 use Exception;
+use Illuminate\Support\Arr;
 
 /**
  * Class responsible to generate utils random data used to populate a database or other resources that needs initial
@@ -139,14 +140,10 @@ class RandomGenerator
     {
         $typesSt = SeedValues::getTypeSt();
         $sts     = SeedValues::getStNames();
-        $cities  = SeedValues::getCities();
-        $states  = SeedValues::getStates();
         $typeSt  = $typesSt[array_rand($typesSt)];
         $st      = $sts[array_rand($sts)];
-        $city    = $cities[array_rand($cities)];
-        $state   = $states[array_rand($states)];
 
-        return rand(1, 9999) . " $st $typeSt, $city, $state, " . rand(10000, 99999);
+        return rand(1, 9999) . " $st $typeSt";
     }
 
     /**
@@ -156,7 +153,7 @@ class RandomGenerator
      */
     public static function generateCity(): string
     {
-        return $cities[array_rand(SeedValues::getCities())];
+        return Arr::random(SeedValues::getCities());
     }
 
     /**
@@ -166,7 +163,17 @@ class RandomGenerator
      */
     public static function generateStateCode(): string
     {
-        return $cities[array_rand(SeedValues::getStates())];
+        return Arr::random(SeedValues::getStates());
+    }
+
+    /**
+     * Generates a business name
+     *
+     * @return string
+     */
+    public static function generateBusinessName(): string
+    {
+        return Arr::random(SeedValues::getBusinessNames());
     }
 
     /**
