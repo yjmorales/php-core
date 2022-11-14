@@ -111,7 +111,7 @@ class RandomGenerator
      *
      * @return string[]
      */
-    public static function generateAddress(int $limit = 20): array
+    public static function generateAddresses(int $limit = 20): array
     {
         $result  = [];
         $typesSt = SeedValues::getTypeSt();
@@ -128,6 +128,55 @@ class RandomGenerator
         }
 
         return $result;
+    }
+
+    /**
+     * Generate an address.
+     *
+     * @return string
+     */
+    public static function generateAddress(): string
+    {
+        $typesSt = SeedValues::getTypeSt();
+        $sts     = SeedValues::getStNames();
+        $cities  = SeedValues::getCities();
+        $states  = SeedValues::getStates();
+        $typeSt  = $typesSt[array_rand($typesSt)];
+        $st      = $sts[array_rand($sts)];
+        $city    = $cities[array_rand($cities)];
+        $state   = $states[array_rand($states)];
+
+        return rand(1, 9999) . " $st $typeSt, $city, $state, " . rand(10000, 99999);
+    }
+
+    /**
+     * Generates a city name.
+     *
+     * @return string
+     */
+    public static function generateCity(): string
+    {
+        return $cities[array_rand(SeedValues::getCities())];
+    }
+
+    /**
+     * Generates a state code.
+     *
+     * @return string
+     */
+    public static function generateStateCode(): string
+    {
+        return $cities[array_rand(SeedValues::getStates())];
+    }
+
+    /**
+     * Generates a zip code
+     *
+     * @return string
+     */
+    public static function generateStateZipCode(): string
+    {
+        return (string)rand(10000, 99999);
     }
 
     /**
