@@ -14,14 +14,13 @@ use SendGrid\Mail\To;
  * An implementation of a Send Grid Email Sender.
  * If this class is being used within a symfony project then it's good to define a service like this:
  *
-
-  Common\Communication\Mailer\SendGrid\Mailer:
-    class: Common\Communication\Mailer\SendGrid\Mailer
-    arguments:
-      - '%env(SENDGRID_API_KEY)%'
-      - '%personal_page_sender_email%'
-      - '%personal_page_sender_name%'
-
+ *
+ * Common\Communication\Mailer\SendGrid\Mailer:
+ * class: Common\Communication\Mailer\SendGrid\Mailer
+ * arguments:
+ * - '%env(SENDGRID_API_KEY)%'
+ * - '%personal_page_sender_email%'
+ * - '%personal_page_sender_name%'
  * @package Common\Communication\Mailer\SendGrid
  */
 class Mailer
@@ -70,7 +69,7 @@ class Mailer
      */
     public function send(string $subject, string $content, To ...$to): bool
     {
-        $result = true;
+        $success = true;
         try {
             $email = new Mail();
             $email->setFrom($this->_senderEmail, $this->_senderName);
@@ -78,11 +77,12 @@ class Mailer
             $email->addTos($to);
             $email->addContent('text/html', $content);
             $sendgrid = new SendGrid($this->_sendGridApiKey);
-            $sendgrid->send($email);
+            $response = $sendgrid->send($email);
+            $success  = 200 <= $response->statusCode() && 299 >= $response->statusCode();
         } catch (Exception $e) {
             $result = false;
         }
 
-        return $result;
+        return $success;
     }
 }
