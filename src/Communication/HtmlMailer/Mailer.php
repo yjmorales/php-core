@@ -5,6 +5,7 @@
 
 namespace Common\Communication\HtmlMailer;
 
+use Monolog\Logger;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -20,6 +21,12 @@ use Exception;
  *     App\Core\Comunication\Email\Mailer:
  *          class: App\Core\Comunication\Email\Mailer
  *          arguments: ['@mailer', 'sender_email@sample.com', 'admin@internal.com', 'Sender Name']
+ *
+ *     Also, must be defined the logger service as follows:
+ *     logger:
+ *          alias: 'monolog.logger'
+ *          public: true
+ *
  */
 class Mailer
 {
@@ -29,6 +36,13 @@ class Mailer
      * @var MailerInterface
      */
     protected MailerInterface $_mailer;
+
+    /**
+     * Holds the logger instance to log messages.
+     *
+     * @var Logger
+     */
+    private Logger $_logger;
 
     /**
      * Holds the sender email.
@@ -57,9 +71,15 @@ class Mailer
      * @param string          $internalTo
      * @param string          $senderName
      */
-    public function __construct(MailerInterface $mailer, string $from, string $internalTo, string $senderName)
-    {
+    public function __construct(
+        MailerInterface $mailer,
+        Logger $logger,
+        string $from,
+        string $internalTo,
+        string $senderName
+    ) {
         $this->_mailer     = $mailer;
+        $this->_logger     = $logger;
         $this->_from       = $from;
         $this->_internalTo = $internalTo;
         $this->_senderName = $senderName;
@@ -90,7 +110,10 @@ class Mailer
         try {
             $this->_mailer->send($email);
         } catch (Exception|TransportExceptionInterface $e) {
-            // todo: log cause
+            $this->_logger->error('There was an error sending an email.' , [
+                'trace' => $e->getTraceAsString(),
+                'cause' => $e->getMessage(),
+            ]);
             $response = false;
         }
 
