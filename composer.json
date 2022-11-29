@@ -10,6 +10,7 @@
   },
   "require": {
     "php": ">=7.4",
+    "ext-bcmath": "^7.4",
     "ext-json": "*",
     "illuminate/support": "^8.53",
     "pda/pheanstalk": "^4.0",
