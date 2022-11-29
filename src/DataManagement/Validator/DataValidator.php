@@ -49,62 +49,38 @@ class DataValidator
     }
 
     /**
-     * Validates a value is a valid float.
+     * Validates a value is a valid integer.
      *
-     * @param mixed    $subject          Value to validate.
-     * @param int      $scale            Comparison scale.
-     * @param int|null $min              Min allowed value.
-     * @param int|null $max              Max allowed value.
-     * @param int|null $maxDecimalPlaces Max allowed decimal places.
-     * @param bool     $mandatory        Indicator of whether the value is required or not.
+     * @param mixed    $subject   Value to be validated.
+     * @param int|null $min       Min allowed value.
+     * @param int|null $max       Max allowed value.
+     * @param bool     $mandatory Indicates if the value is required.
      *
      * @return bool
      */
-    public function isValidFloat(
-        $subject,
-        int $scale = 8,
-        int $min = null,
-        int $max = null,
-        int $maxDecimalPlaces = null,
-        bool $mandatory = true
-    ): bool {
+    public function isValidInt($subject, int $min = null, int $max = null, bool $mandatory = true): bool
+    {
+        $min = null === $min ? -2 ** 31 : $min;
+        $max = null === $max ? (2 ** 31) - 1 : $max;
+
         if (is_bool($subject) || !$this->_validateCommon($subject)) {
             return false;
         }
 
-        $strSubject = (string)$subject;
-        if ($this->_validateMandatory($subject, $mandatory)) {
-            return false;
-        }
+        $intSubject    = (int)$subject;
+        $stringSubject = (string)$subject;
 
-        $regex = '/^[-+]?[0-9]*\.?[0-9]+$/';
-        if (!preg_match($regex, $strSubject)) {
-            return false;
-        }
-        $floatSubject = (float)$subject;
-
-        if ($floatSubject === INF || $floatSubject === -INF || is_nan($floatSubject)) {
-            return false;
-        }
-
-        if (!preg_match($regex, (string)$floatSubject)) {
-            return false;
-        }
-
-        if ($min !== null && bccomp((string)$min, $strSubject, $scale) === 1) {
-            return false;
-        }
-
-        if ($max !== null && bccomp($strSubject, (string)$max, $scale) === 1) {
-            return false;
-        }
-
-        if ($maxDecimalPlaces === null) {
+        if ('' === $stringSubject && !$mandatory) {
             return true;
         }
 
-        return !strpos($strSubject, '.') || strlen(explode('.', $strSubject)[1]) <= $maxDecimalPlaces;
+        if ((string)$intSubject !== $stringSubject) {
+            return false;
+        }
+
+        return (($min === null || $intSubject >= $min) && ($max === null || $intSubject <= $max));
     }
+
 
     /**
      * Holds common validations.
