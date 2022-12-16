@@ -27,7 +27,7 @@ class DataValidator
         }
 
         $subject = (string)$subject;
-        if ($this->_validateMandatory($subject, $mandatory)) {
+        if (!$this->_validateMandatory($subject, $mandatory)) {
             return false;
         }
 
