@@ -14,6 +14,7 @@
     "ext-json": "*",
     "illuminate/support": "^8.53",
     "pda/pheanstalk": "^4.0",
+    "predis/predis": "^2.0",
     "sendgrid/sendgrid": "^8.0",
     "symfony/mailer": "^5.4",
     "symfony/monolog-bundle": "^3.8",
