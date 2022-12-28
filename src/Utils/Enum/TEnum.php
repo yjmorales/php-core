@@ -52,11 +52,6 @@ trait TEnum
         $this->_populate(self::$_definitions[$name]);
     }
 
-    protected static function _initializeDefinitions(): array
-    {
-        return [];
-    }
-
     private static function _initialize(): void
     {
         if (self::$_isInitialized) {
@@ -106,5 +101,33 @@ trait TEnum
         throw new Exception('Not found');
     }
 
+    /**
+     * Returns the array holding the definitions.
+     *
+     * return [
+     *     'NAME' => [
+     *          'index' => 'value',
+     *           ....
+     *      ],
+     * ....
+     * ];
+     *
+     * @return array
+     */
+    abstract protected static function _initializeDefinitions(): array;
+
+
+    /**
+     * Populates the local properties with the respective definition. Normally the local property
+     * has the same name as the definition index.
+     *
+     * (...)
+     *     $this->_property = $definition['index'];
+     * (...)
+     *
+     * @param array $definition
+     *
+     * @return void
+     */
     abstract protected function _populate(array $definition): void;
 }
