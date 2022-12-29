@@ -31,6 +31,11 @@ class DataValidator
             return false;
         }
 
+        // If it is not mandatory, and it's not being sent then it's valid.
+        if (!$mandatory && empty($subject)) {
+            return true;
+        }
+
         $len = mb_strlen($subject);
 
         return ($len >= (int)$min && ($max === null || $len <= (int)$max));
