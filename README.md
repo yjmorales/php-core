@@ -59,11 +59,13 @@ Supports anti-spamming by using [Google ReCaptchaV3](https://developers.google.c
 ->>>> 4) Phone number utilities and Twig Extension for phone formatting.
 
 Holds some utils class and functions to manipulate phone formats and to render phone in twig templates.
-
+<br>
+<br>
 ->>>> 5) Random Data Generator
 
 Holds some components to generate random data like: names, lastnames, cities, etc.  
-
+<br>
+<br>
 ->>>> 6) Pheanstalkd implementation
 
 Holds an implementation for Pheanstalkd.
