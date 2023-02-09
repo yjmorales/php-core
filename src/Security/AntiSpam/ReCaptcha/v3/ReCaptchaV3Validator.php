@@ -82,13 +82,13 @@ class ReCaptchaV3Validator
      *
      * @link https://developers.google.com/recaptcha/docs/verify#api-response
      *
-     * @param string $userAction Holds the action name performed by client and supposed to be validated.
+     * @param string|null $userAction Holds the action name performed by client and supposed to be validated.
      *
      * @return bool True if is valid, means the action is performed by real user. Otherwise false, means it is a robot.
      *
      * @throws ReCaptchaV3Exception
      */
-    public function validateByUserAction(string $userAction): bool
+    public function validateByUserAction(string $userAction = null): bool
     {
         try {
             $clientToken = $this->_tokenExtractor->getToken();
@@ -103,7 +103,6 @@ class ReCaptchaV3Validator
             $isValid &= (bool)$success;
             $isValid &= $score >= 0.5;
             $isValid &= null !== $action;
-            $isValid &= $action === $userAction;
 
             return (bool)$isValid;
         } catch (Exception $e) {
