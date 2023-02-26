@@ -32,6 +32,21 @@ function AutoPhoneFormatter() {
     function init() {
         // Subscribe the keyup event. Each time a valid numerical key is pressed-and-leaved the formatter function is executed.
         $field.on('keyup', autoFormat);
+
+        // formats the already existing phone number values.
+        setupFields();
+    }
+
+    /**
+     * formats the already existing phone number values.
+     *
+     * @return {void}
+     */
+    function setupFields() {
+        $field.each((pos, $phoneField) => {
+            const value = $($phoneField).val();
+            $($phoneField).val(convertValue(value));
+        });
     }
 
     /**
@@ -39,21 +54,34 @@ function AutoPhoneFormatter() {
      */
     function autoFormat() {
         const $field = $(this);
-        let value    = $field.val()
-            , output = '';
+        let value = $field.val();
 
         // If there is no text in the field then doesn't apply the formatter function.
         if (value.length === 0) {
             return;
         }
 
+        // Filling out the field with the new formatted output.
+        $field.val(convertValue(value));
+    }
+
+    /**
+     * Converts a 10 digits phone into the respective format (nnn) nnn-nnn
+     *
+     * @param {string} value value to be formatted.
+     *
+     * @return string
+     */
+    function convertValue(value) {
+        let output = '';
+
         // Only the formatter is applied to numerical inputs. So, it replaces all non-numerical inputs with an empty value.
         value = value.replace(/[^0-9]/g, '');
 
         // Building the output.
         const area = value.substr(0, 3)
-            , pre  = value.substr(3, 3)
-            , tel  = value.substr(6, 4);
+            , pre = value.substr(3, 3)
+            , tel = value.substr(6, 4);
 
         if (area.length < 3) {
             output = `(${area}`;
@@ -63,7 +91,6 @@ function AutoPhoneFormatter() {
             output = `(${area}) ${pre} - ${tel}`;
         }
 
-        // Filling out the field with the new formatted output.
-        $field.val(output);
+        return output;
     }
 }
