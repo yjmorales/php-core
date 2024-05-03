@@ -13,14 +13,14 @@
     "ext-bcmath": "^8.1",
     "ext-json": "*",
     "illuminate/support": "^8.53",
-    "pda/pheanstalk": "^4.0",
+    "pda/pheanstalk": "^5.0",
     "predis/predis": "^2.0",
-    "sendgrid/sendgrid": "^8.0",
+    "sendgrid/sendgrid": "^8.1",
     "symfony/mailer": "6.4.*",
-    "symfony/monolog-bundle": "^3.8",
+    "symfony/monolog-bundle": "^3.10",
     "symfony/sendgrid-mailer": "6.4.*",
     "symfony/twig-bundle": "6.4.*",
-    "twig/twig": "^3.4"
+    "twig/twig": "^3.9"
   },
   "config": {
     "bin-dir": "bin",
